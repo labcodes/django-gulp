@@ -103,9 +103,11 @@ class Command(StaticfilesRunserverCommand):
         self.stdout.write('>>> Starting gulp')
 
         gulp_command = getattr(settings, 'GULP_DEVELOP_COMMAND', 'gulp')
+        gulp_path = getattr(settings, 'GULP_PATH', '')
         self.gulp_process = subprocess.Popen(
             [gulp_command],
             shell=True,
+            cwd=gulp_path,
             stdin=subprocess.PIPE,
             stdout=self.stdout,
             stderr=self.stderr)
